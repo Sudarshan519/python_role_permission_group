@@ -1,8 +1,13 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.http import HttpResponse
 from django.views.generic import ListView
 from django.shortcuts import render
-from  .models import Post
+from rest_framework.views import APIView
+from userlevelperm.serializers import UserSerializer
+from  .models import Post, User
 from django.contrib.auth.decorators import permission_required
+from rest_framework.response import Response
+from rest_framework import status
 def index(request):
     return render(request, 'post')
 
@@ -39,3 +44,19 @@ class PostListView(UserPassesTestMixin, View):
 
         return render(request, self.template_name)
 
+
+from rest_framework import viewsets
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    This viewset automatically provides `list` and `retrieve` actions.
+    """
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class RegisterView(viewsets.ListCreateAPIView):
+     def post(self, request, format=None):
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

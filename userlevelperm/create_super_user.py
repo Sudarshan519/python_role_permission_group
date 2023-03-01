@@ -12,5 +12,6 @@ def create_admin():
         # Output will be true even if the permission does not exists
         print(superuser.has_perm("foo.add_bar"))
     except Exception as e:
+        
         print(e)
         print("user exists")

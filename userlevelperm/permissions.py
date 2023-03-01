@@ -42,7 +42,8 @@ def create_group():
         author_group, created = Group.objects.get_or_create(name="Author")
         editor_group, created = Group.objects.get_or_create(name="Editor")
         publisher_group, created = Group.objects.get_or_create(name="Publisher")
-
+        publisher_group, created = Group.objects.get_or_create(name="User")
+        publisher_group, created = Group.objects.get_or_create(name="Admin")
         content_type = ContentType.objects.get_for_model(Post)
         post_permission = Permission.objects.filter(content_type=content_type)
         print([perm.codename for perm in post_permission])

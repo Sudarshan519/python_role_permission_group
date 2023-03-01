@@ -8,15 +8,15 @@ class UserAdmin(UserAdmin):
     list_display = ("email", "is_staff", "is_active",)
     list_filter = ("email", "is_staff", "is_active",)
     fieldsets = (
-        (None, {"fields": ("email", "password")}),
-        ("Permissions", {"fields": ("is_staff", "is_active", "groups", "user_permissions")}),
+        (None, {"fields": ("username","email", "password","role")}),
+        ("Permissions", {"fields": ("is_staff", "is_active", "groups", "user_permissions","firebase_token","created_gps","device_id",),}),
     )
     add_fieldsets = (
         (None, {
             "classes": ("wide",),
             "fields": (
                 "email", "password1", "password2", "is_staff",
-                "is_active", "groups", "user_permissions"
+                "is_active", "groups", "user_permissions","role","firebase_token","created_gps","device_id"
             )}
         ),
     )
@@ -26,4 +26,4 @@ class UserAdmin(UserAdmin):
 # Register your models here.
 admin.site.register(Post)
 
-admin.site.register(User)
+admin.site.register(User,UserAdmin)
