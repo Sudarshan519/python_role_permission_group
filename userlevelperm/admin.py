@@ -8,7 +8,9 @@ class UserAdmin(UserAdmin):
     list_display = ("email", "is_staff", "is_active",)
     list_filter = ("email", "is_staff", "is_active",)
     fieldsets = (
-        (None, {"fields": ("username","email", "password","role")}),
+        (None, {"fields": (
+            # "username",
+            "email", "password","role")}),
         ("Permissions", {"fields": ("is_staff", "is_active", "groups", "user_permissions","firebase_token","created_gps","device_id",),}),
     )
     add_fieldsets = (
@@ -22,7 +24,8 @@ class UserAdmin(UserAdmin):
     )
     search_fields = ("email",)
     ordering = ("email",)
-
+    def __str__(self):
+        return self.email
 # Register your models here.
 admin.site.register(Post)
 

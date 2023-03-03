@@ -131,3 +131,19 @@ AUTH_USER_MODEL = 'userlevelperm.User'
 MEDIA_ROOT = '/Users/user/Documents/pyenv/tutorial/media'
 
 MEDIA_URL = '/media/'
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+SILENCED_SYSTEM_CHECKS = ['auth.E003', 'auth.W004']
