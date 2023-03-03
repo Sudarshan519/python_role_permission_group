@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
        'drf_yasg',
     'rest_framework_swagger',
-    'userlevelperm'
+    'userlevelperm',
+        'djoser',
+        'news'
 ]
 
 MIDDLEWARE = [
@@ -131,3 +133,5 @@ AUTH_USER_MODEL = 'userlevelperm.User'
 MEDIA_ROOT = '/Users/user/Documents/pyenv/tutorial/media'
 
 MEDIA_URL = '/media/'
+SILENCED_SYSTEM_CHECKS = ['auth.E003', 'auth.W004']
+# APPEND_SLASH = False

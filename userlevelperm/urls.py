@@ -21,17 +21,27 @@ schema_view = get_schema_view(
    public=True,
    permission_classes=[permissions.AllowAny],
 )
-create_group()
-create_permission()
-create_admin()
+
+ 
+# create_group()
+# create_permission()
+# create_admin()
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
-router.register(r'register', views.RegisterView.as_view())
-router.register(r'users', views.UserViewSet,basename="user")
+# router.register(r'register', views.RegisterView.as_view(),basename="user")
+# router.register(r'users', views.UserViewSet,basename="user")
+# router.register(r'login',views.LoginView.as_view(),basename='login')
+# router.register(r'post',views.PostListView.as_view(),basename="post")
+# router.register(r'auth', include('djoser.urls'),basename='auth'),
 urlpatterns = [
+    path('',include('djoser.urls') ),
+  path('register', views.RegisterView.as_view()),
+    path('login', views.LoginView.as_view()),
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
    re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
    re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    
+   # path('auth',include('djoser.urls')),
 path('', include(router.urls)),
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
